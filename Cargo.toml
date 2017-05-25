@@ -1,0 +1,9 @@
+[package]
+name = "rocket_cmd_bug"
+version = "0.1.0"
+authors = ["Chen Weiguang <chen.weiguang@gmail.com>"]
+
+[dependencies]
+hyper = "0.10"
+rocket = "=0.2.6"
+rocket_codegen = "=0.2.6"
