@@ -10,18 +10,22 @@ use std::io::Read;
 use std::process::{Command, Output};
 use std::thread;
 
+// client
+
+fn read_body(rsp: &mut Response) -> String {
+    let mut s = String::new();
+    rsp.read_to_string(&mut s).unwrap();
+    s
+}
+
+// server
+
 fn exec_cmd(cmd: &str) -> Output {
     if cfg!(target_os = "windows") {
         Command::new("cmd").args(&["/C", cmd]).output()
     } else {
         Command::new("sh").args(&["-c", cmd]).output()
     }.unwrap()
-}
-
-fn read_body(rsp: &mut Response) -> String {
-    let mut s = String::new();
-    rsp.read_to_string(&mut s).unwrap();
-    s
 }
 
 #[get("/")]
@@ -32,6 +36,7 @@ fn execute() -> String {
 
 fn main() {
     thread::spawn(|| {
+        // client thread
         const WAIT_MS: u64 = 1000;
         const LOOP_COUNT: usize = 50;
 
@@ -52,5 +57,6 @@ fn main() {
         println!("Client completed! Press CTRL-C to exit...");
     });
 
+    // server start
     rocket::ignite().mount("/", routes![execute]).launch();
 }
