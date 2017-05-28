@@ -5,5 +5,5 @@ authors = ["Chen Weiguang <chen.weiguang@gmail.com>"]
 
 [dependencies]
 hyper = "0.10"
-rocket = "=0.2.6"
-rocket_codegen = "=0.2.6"
+rocket = { git = "https://github.com/SergioBenitez/Rocket.git", branch = "master" }
+rocket_codegen = { git = "https://github.com/SergioBenitez/Rocket.git", branch = "master" }
